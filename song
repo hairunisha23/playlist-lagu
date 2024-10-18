@@ -1,0 +1,58 @@
+// Kelas Song yang merepresentasikan sebuah lagu
+class Song {
+    String title; // Judul lagu
+    Song next; // Referensi ke lagu berikutnya
+
+    // Constructor
+    public Song(String title) {
+        this.title = title;
+        this.next = null;
+    }
+}
+
+// Kelas Playlist yang merepresentasikan daftar lagu
+class Playlist {
+    private Song head; // Referensi ke lagu pertama
+
+    // Constructor
+    public Playlist() {
+        this.head = null;
+    }
+
+    // Metode untuk menambahkan lagu di akhir playlist
+    public void addSong(String title) {
+        Song newSong = new Song(title);
+        if (head == null) {
+            head = newSong; // Jika playlist kosong, lagu baru menjadi head
+        } else {
+            Song current = head;
+            while (current.next != null) {
+                current = current.next; // Mencari akhir dari playlist
+            }
+            current.next = newSong; // Menambahkan lagu baru di akhir
+        }
+    }
+
+    // Metode untuk menampilkan semua lagu dalam playlist
+    public void displayPlaylist() {
+        Song current = head;
+        if (current == null) {
+            System.out.println("Playlist kosong.");
+            return;
+        }
+        while (current != null) {
+            System.out.print(current.title + " -> ");
+            current = current.next;
+        }
+        System.out.println("null"); // Menandakan akhir dari playlist
+    }
+
+    // Main method untuk testing
+    public static void main(String[] args) {
+        Playlist playlist = new Playlist();
+        playlist.addSong("Lagu 1");
+        playlist.addSong("Lagu 2");
+        playlist.addSong("Lagu 3");
+        playlist.displayPlaylist(); // Output: Lagu 1 -> Lagu 2 -> Lagu 3 -> null
+    }
+}
